@@ -4,7 +4,9 @@ const {
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    addFriend,
+    deleteFriend
   } = require('../../controllers/user-controller');
 
 
@@ -14,11 +16,18 @@ router
   .get(getAllUsers)
   .post(createUser);
 
-// GET single user, PUT user, and DELETE user at /api/users/:id
+// GET single user, PUT user, and DELETE user at /api/users/:userId
+// POST friend at /api/users/:userId (creates friends and friendId)
 router
   .route('/:id')
-  .get(getPizzaById)
+  .get(getUserById)
   .put(updateUser)
-  .delete(deleteUser);
+  .delete(deleteUser)
+  .post(addFriend);
+
+// DELETE friends at /api/users/:userId/friends/:friendId
+router
+  .route('/friends/:friendId')
+  .delete(deleteFriend);
 
 module.exports = router;
