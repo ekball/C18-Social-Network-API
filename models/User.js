@@ -2,11 +2,7 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-// function to make sure email input matches the outline of any email address
-function emailIsReal (email) {
-    const regex = `/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/`;
-    return regex.test(email);
-}
+
 
 // create new schema
 const UserSchema = new Schema(
@@ -17,11 +13,12 @@ const UserSchema = new Schema(
             required: true,
             trim: true
         },
-          email: {
+        email: {
             type: String,
             unique: true,
             required: true,
-            validate: [emailIsReal, 'Must enter a valid email address']
+            // Regex validator to make sure email input matches the outline of any email address
+            match: [`/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/`, 'Must enter a valid email address']
         },
         thoughts: [
             {
