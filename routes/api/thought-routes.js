@@ -9,9 +9,9 @@ const {
     deleteReaction
 } = require('../../controllers/thought-controller');
 
-// create thoughts through the user id at /api/thoughts/<userId>
+// create thoughts at /api/thoughts
 router
-    .route('/:userId')
+    .route('/')
     .get(getAllThoughts);
 
 // delete thoughts through the user id at /api/thoughts/:userId/:thoughtId
@@ -21,7 +21,7 @@ router
     .get(getSingleThought)
     .post(addThought)
     .put(updateThought)
-    // .put(addReaction)
+    .post(addReaction)
     .delete(deleteThought);
 
 // delete reactions through the reaction id (created above)

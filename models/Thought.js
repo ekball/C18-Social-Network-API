@@ -41,16 +41,19 @@ const ThoughtSchema = new Schema(
                         default: Date.now,
                         get: createdAtVal => dateFormat(createdAtVal)
                     }
-                    
+                },
+                {
+                    toJSON: {
+                        getters: true
+                    }
                 }
         ]
     },
     {
         toJSON: {
             virtuals: true,
-            getters: true,
+            getters: true
         },
-        id: false
     }
 );
 

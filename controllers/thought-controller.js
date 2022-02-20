@@ -14,7 +14,7 @@ const thoughtController = {
 
     // get one thought by id
     getSingleThought({ params }, res) {
-        Thought.findOne({ _id: params.id })
+        Thought.findOne({ _id: params.thoughtId })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'There was no thought found with this id!' });
@@ -101,7 +101,7 @@ const thoughtController = {
 
     // remove reaction
     deleteReaction({ params }, res) {
-        Thought.findOneAndUpdate(
+        Thought.findByIdAndUpdate(
             { _id: params.thoughtId },
             { $pull: { reactions: { reactionId: params.reactionId } } },
             { new: true }
